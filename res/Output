@@ -1,0 +1,106 @@
+
+
+Menu
+
+
+1. Move Character
+2. Image Output
+3. Display room
+4. Display neighbours of room
+5. Exit menu
+1
+Player has moved from : Nursery to : Gym 
+
+Menu
+
+
+1. Move Character
+2. Image Output
+3. Display room
+4. Display neighbours of room
+5. Exit menu
+1
+Player has moved from : Gym  to : Guest room 
+
+Menu
+
+
+1. Move Character
+2. Image Output
+3. Display room
+4. Display neighbours of room
+5. Exit menu
+1
+Player has moved from : Guest room  to : Master suites
+
+Menu
+
+
+1. Move Character
+2. Image Output
+3. Display room
+4. Display neighbours of room
+5. Exit menu
+1
+Player has moved from : Master suites to : Treasure room
+
+Menu
+
+
+1. Move Character
+2. Image Output
+3. Display room
+4. Display neighbours of room
+5. Exit menu
+3
+Enter room index
+3
+Name of the room is Master suites
+Items present in this room are : 
+Blade
+Neighbours for this room are : 
+Room : Guest room  with room id: 2
+Room : Practice room with room id: 5
+Room : Library  with room id: 8
+
+
+Menu
+
+
+1. Move Character
+2. Image Output
+3. Display room
+4. Display neighbours of room
+5. Exit menu
+4
+Enter room index
+4
+Neighbours for this room are : 
+Room : Nursery with room id: 0
+Room : Gym  with room id: 1
+Room : Guest room  with room id: 2
+Room : Practice room with room id: 5
+Room : Craft room with room id: 6
+Room : Movie theatre  with room id: 7
+
+
+Menu
+
+
+1. Move Character
+2. Image Output
+3. Display room
+4. Display neighbours of room
+5. Exit menu
+2
+The world image display
+
+
+Menu
+
+
+1. Move Character
+2. Image Output
+3. Display room
+4. Display neighbours of room
+5. Exit menu
