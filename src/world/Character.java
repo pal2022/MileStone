@@ -9,13 +9,17 @@ public class Character implements CharacterInterface {
   private String name;
   private int health;
   private int roomId;
+  private Mansion world;
+  private int count;
   
   /**
    * Passes the information from characterInfo to this class.
    * @param characterInfo contains health and name of the character
+   * @param roomCount total rooms
    */
-  public Character(String characterInfo) {
+  public Character(String characterInfo, int roomCount) {
     parseCharacterInformation(characterInfo);
+    this.count = roomCount;
     this.roomId = 0;
   }
   
@@ -41,7 +45,7 @@ public class Character implements CharacterInterface {
   public void movePlayer() {
     this.roomId = this.roomId + 1;
     //22 is the last room id
-    if (roomId > 22) {
+    if (roomId > (count - 1)) {
       this.roomId = 0;
     }
   }

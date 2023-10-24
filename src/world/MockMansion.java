@@ -8,36 +8,15 @@ import java.util.Map;
 /** This class for storing the information of the mansion.
  * It has methods assign character and rooms to the mansion and get neighbours of the room.
  */
-public class Mansion implements MansionInterface {
+public class MockMansion implements MansionInterface {
 
   public Map<Integer, Space> rooms = new HashMap<Integer, Space>();
   public Character targetCharacter;
-  public List<Player> players;
-  private int rows;
-  private int columns;
-  private int roomCount;
-  private String mansionName;
-  private int currentPlayer;
-  private int turnNumber;
+  public final List<Player> players = new ArrayList<Player>();
+  private int currentPlayer = 0;
+  private int turnNumber = 1;
+  private final StringBuilder log = new StringBuilder();
   
-  
-  
-  /**
-   * This constructor takes the required values of the fields obtained from the file.
-   * @param rows rows of mansion
-   * @param columns columns of mansion
-   * @param roomCount number of rooms in mansion
-   * @param mansionName name of the mansion
-   */
-  public Mansion(int rows, int columns, int roomCount, String mansionName) {
-    this.rows = rows;
-    this.columns = columns;
-    this.roomCount = roomCount;
-    this.mansionName = mansionName;
-    this.currentPlayer = 0;
-    this.turnNumber = 1;
-    this.players = new ArrayList<>();
-  }
   
   /**
    * This method is for adding room in the mansion.
@@ -69,7 +48,7 @@ public class Mansion implements MansionInterface {
    */
   @Override
   public void assignNeighbours() {
-    for (int i = 0; i < this.roomCount; i++) {
+    for (int i = 0; i < getRoomCount(); i++) {
       Space room1 = rooms.get(i);
       for (int j = 0; j < getRoomCount(); j++) {
         Space room2 = rooms.get(j);
@@ -96,7 +75,7 @@ public class Mansion implements MansionInterface {
    */
   @Override
   public int getRows() {
-    return this.rows;
+    return 25;
   }
 
   /**
@@ -104,7 +83,7 @@ public class Mansion implements MansionInterface {
    */
   @Override
   public int getColumns() {
-    return this.columns;
+    return 25;
   }
 
   /**
@@ -112,7 +91,7 @@ public class Mansion implements MansionInterface {
    */
   @Override
   public int getRoomCount() {
-    return this.roomCount;
+    return rooms.size();
   }
 
   /**
@@ -120,7 +99,7 @@ public class Mansion implements MansionInterface {
    */
   @Override
   public String getName() {
-    return this.mansionName;
+    return "MockMansion";
   }
 
   /**
@@ -128,7 +107,7 @@ public class Mansion implements MansionInterface {
    */
   @Override
   public Map<Integer, Space> getRooms() {
-    return this.rooms;
+    return rooms;
   }
   
   @Override
@@ -138,9 +117,8 @@ public class Mansion implements MansionInterface {
 
   @Override
   public void addPlayer(Player player) {
-    synchronized (players) {
-      players.add(player);
-    }
+    players.add(player);
+    log.append("Player " + player.getName() + " added to the mansion");
   }
   
   @Override
@@ -155,22 +133,22 @@ public class Mansion implements MansionInterface {
     }
     currentPlayer = (currentPlayer + 1) % players.size();
     return getCurrentPlayer();
-  }
+  } 
   
   public int getTurnNumber() {
-    return this.turnNumber;
+    return turnNumber;
   }
   
   @Override
   public void displayPlayers() {
     System.out.println("Players in the mansion are : ");
     for (Player player : players) {
-      System.out.println("Player name : " + player.getName());
-      System.out.println("Player space : " + player.playerSpace());
-      System.out.println("Picked items : ");
+      log.append("\nPlayer name : " + player.getName());
+      log.append("\nPlayer Space : " + player.playerSpace());
+      log.append("\nPlayer items : ");
       player.displayPickedItems();
-      System.out.println("Display neighbours:");
-      player.displayNearbySpace(player);
+      log.append("\nPlayer visited spaces : ");
+      player.displaySpacePath();
       
     }
   }
@@ -179,6 +157,10 @@ public class Mansion implements MansionInterface {
   public  String toString() {
     return String.format("Mansion name: %s, number of rows: %d, number of columns: %d "
     + "and number of rooms: %d", getName(), getRows(), getColumns(), getRoomCount());  
+  }
+  
+  public String getLog() {
+    return log.toString();
   }
   
 }

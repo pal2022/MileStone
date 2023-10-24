@@ -24,7 +24,7 @@ public interface MansionInterface {
    * This method is used to get the room the target character is present in.
    * @return room name
    */
-  String getPlayerRoomName();
+  String getTargetRoomName();
   
   /**
    * This method is used to assign neighbours of a given space.
@@ -61,4 +61,14 @@ public interface MansionInterface {
    */
   Map<Integer, Space> getRooms();
 
+  Space getRoomWithId(int id);
+  
+  void addPlayer(Player player);
+  
+  Player getCurrentPlayer();
+  
+  Player playerTurn();
+  
+  void displayPlayers();
+  
 }

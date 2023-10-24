@@ -1,5 +1,8 @@
 package world;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The class Item implements the interface ItemInterface.
  * This class is used to assign the room for the items using the data given in the
@@ -11,6 +14,7 @@ public class Item implements ItemInterface {
   private int roomId;
   private String itemName;
   private int damage;
+  private List<Item> items;
   
   /**
    * This constructor is used for parsing information from the file using itemInfo.
@@ -18,7 +22,6 @@ public class Item implements ItemInterface {
    */
   public Item(String itemInfo) {
     try {
-      //to remove extra spaces
       itemInfo = itemInfo.stripLeading();
       String[] itemInfoList = itemInfo.split("\\s+", 3);
       this.roomId = Integer.parseInt(itemInfoList[0]); 
@@ -64,7 +67,8 @@ public class Item implements ItemInterface {
   public int getRoomId() {
     return this.roomId;
   }
-
+  
+  
   @Override
   public String toString() {
     return String.format("Item name: %s, item damage power: %d, item roomId: %s", 

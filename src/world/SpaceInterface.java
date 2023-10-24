@@ -25,6 +25,8 @@ public interface SpaceInterface {
    */
   void addItem(Item item);
   
+  void removeItem(Item item);
+  
   /**
    * This method is for displaying information of the room.
    */

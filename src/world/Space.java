@@ -31,7 +31,11 @@ public class Space implements SpaceInterface {
     this.items = new ArrayList<Item>();
   }
   
-  @Override
+  public Space(int spaceid) {
+    this.spaceId = spaceId;
+  }
+  
+  @Override 
   public void parseRoomInformation(String roomInfo) {
     //try catch
     roomInfo = roomInfo.stripLeading();
@@ -71,6 +75,11 @@ public class Space implements SpaceInterface {
   public void addItem(Item item) {
     this.items.add(item);
   }
+  
+  @Override
+  public void removeItem(Item item) {
+    this.items.remove(item);
+  }
 
   @Override
   public void displayInformation() {
@@ -85,6 +94,7 @@ public class Space implements SpaceInterface {
       }
     }
     displayNeighbours();
+    System.out.println("Players present in this room are :");
   }
 
   @Override
@@ -139,6 +149,7 @@ public class Space implements SpaceInterface {
     return neighbours;
   }
 
+  //I have added this method in item class should i remove it from here?
   @Override
   public List<Item> getItems() {
     List items = new ArrayList<>();
@@ -148,4 +159,8 @@ public class Space implements SpaceInterface {
     return items;
   }
 
+  @Override
+  public String toString() {
+    return getName();
+  }
 }

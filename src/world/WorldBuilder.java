@@ -11,7 +11,7 @@ public class WorldBuilder {
   /**
    * This method passes the filepath from the main class.
    * @param filePath path of the text file.
-   * @return world object of Mansoin class
+   * @return world object of Mansion class
    */
   public static Mansion build(String filePath) {
 
@@ -32,7 +32,7 @@ public class WorldBuilder {
     //for skipping first 3 lines + the lines containing room information as next line has itemCount 
     final int itemCount = Integer.parseInt(strlist.get(3 + roomCount));
     Mansion world = new Mansion(mansionRows, mansionCols, roomCount, mansionName);
-    Character player = new Character(characterInfo);
+    Character player = new Character(characterInfo, roomCount);
 
     world.assignCharacter(player);
 

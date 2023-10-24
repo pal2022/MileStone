@@ -1,5 +1,7 @@
 package world;
 
+import java.util.List;
+
 /**
  * This interface for defining methods for items in the world.
  */
