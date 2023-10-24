@@ -46,7 +46,7 @@ public class MansionTest {
   public void testAssignCharacter() {
     mansion = new Mansion(10, 15, 14, "Pal's Mansion");
     String roomInfo = "5 12 8 21 Treasure room";
-    Character character = new Character("50 Palkan Motwani");
+    Character character = new Character("50 Palkan Motwani", 22);
     mansion.assignCharacter(character);
     assertEquals(character, mansion.targetCharacter);
   }

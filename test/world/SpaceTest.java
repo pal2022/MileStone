@@ -3,6 +3,8 @@ package world;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -124,5 +126,23 @@ public class SpaceTest {
     String expected = "Treasure room";
     String actual = space.getName();
     assertEquals(expected, actual);
+  }
+  
+  /**
+   * A test to verify that implementation can provide a description of a specific space
+   * that does not have any neighbours.
+   */
+  @Test
+  public void testNoNeighbours() {
+    int spaceId = 30;
+    String roomInfo = "13 3 16 6 Extra";
+    Space space1 = new Space(spaceId, roomInfo);
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();  
+    PrintStream ps = new PrintStream(baos);
+    PrintStream sout = System.out;
+    System.setOut(ps);
+    space1.displayNeighbours();
+    String expected = "There are no neighbours for the room Extra\n";
+    assertEquals(expected, baos.toString());
   }
 }
