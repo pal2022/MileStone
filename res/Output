@@ -1,80 +1,359 @@
-
-
-Menu
-
-
-1. Move Character
-2. Image Output
-3. Display room
-4. Display neighbours of room
-5. Exit menu
+Enter file path and max number of turns
+Game Starts!
+Enter the number of players playing the game: 
+2
+Enter player name : 
+palkan
+Enter starting room id : 
 1
-Player has moved from : Nursery to : Gym 
+Enter player name : 
+mrinal
+Enter starting room id : 
+2
+
 
 Menu
 
 
-1. Move Character
-2. Image Output
-3. Display room
-4. Display neighbours of room
-5. Exit menu
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn palkan
 1
-Player has moved from : Gym  to : Guest room 
+Neighbouring spaces for Gym  of the player palkan are : 
+
+0 : Nursery
+
+2 : Guest room 
+
+4 : Treasure room
+
+5 : Practice room
+Enter the room id of the room you wish to go to : 
+2
+Player palkan has moved to the room Guest room 
+Palkan Motwani has moved from : Nursery to : Gym 
 
 Menu
 
 
-1. Move Character
-2. Image Output
-3. Display room
-4. Display neighbours of room
-5. Exit menu
-1
-Player has moved from : Guest room  to : Master suites
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn mrinal
+2
+This room has no items.
+Palkan Motwani has moved from : Gym  to : Guest room 
 
 Menu
 
 
-1. Move Character
-2. Image Output
-3. Display room
-4. Display neighbours of room
-5. Exit menu
-1
-Player has moved from : Master suites to : Treasure room
-
-Menu
-
-
-1. Move Character
-2. Image Output
-3. Display room
-4. Display neighbours of room
-5. Exit menu
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn palkan
 3
-Enter room index
-3
-Name of the room is Master suites
-Items present in this room are : 
-Blade
 Neighbours for this room are : 
-Room : Guest room  with room id: 2
+Room : Gym  with room id: 1
+Room : Master suites with room id: 3
+Room : Treasure room with room id: 4
 Room : Practice room with room id: 5
-Room : Library  with room id: 8
+Palkan Motwani has moved from : Guest room  to : Master suites
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn mrinal
+4
+You haven't picked any items yet.
 
 
 Menu
 
 
-1. Move Character
-2. Image Output
-3. Display room
-4. Display neighbours of room
-5. Exit menu
-4
-Enter room index
-4
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn mrinal
+5
+Rooms visited by the player mrinal are : 
+Guest room 
+
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn mrinal
+2
+This room has no items.
+Palkan Motwani has moved from : Master suites to : Treasure room
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn palkan
+6
+Enter player name: 
+palkan
+Player name: palkan
+Items List : 
+You haven't picked any items yet.
+Player current space : Guest room 
+
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn palkan
+7
+Players in the mansion are : 
+Player name : palkan
+Player space : Guest room 
+Picked items : 
+You haven't picked any items yet.
+Display neighbours:
+Neighbours for this room are : 
+Room : Gym  with room id: 1
+Room : Master suites with room id: 3
+Room : Treasure room with room id: 4
+Room : Practice room with room id: 5
+Player name : mrinal
+Player space : Guest room 
+Picked items : 
+You haven't picked any items yet.
+Display neighbours:
+Neighbours for this room are : 
+Room : Gym  with room id: 1
+Room : Master suites with room id: 3
+Room : Treasure room with room id: 4
+Room : Practice room with room id: 5
+
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn palkan
+8
+Enter space id 
+2
+Players present in the room Guest room are: 
+palkan
+mrinal
+
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn palkan
+9
+World Image
+
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+ It's your turn palkan
+10
+You have exited the game
+Enter file path: 
+C:\Users\hp\eclipse-workspace\lab00_getting_started\MileStone1\model\src\run\PalMansion.txt
+Game Starts!
+ It's your turn Ram Charan
+This moves the player to one of the neighbouring spaces.
+Neighbouring spaces for Gym  of the player Ram Charan are : 
+
+0 : Nursery
+
+2 : Guest room 
+
+4 : Treasure room
+
+5 : Practice room
+Enter the room id of the room you wish to go to : 
+Player Ram Charan has moved to the room Practice room
+Palkan Motwani has moved from : Nursery to : Gym 
+
+List of all spaces visited by the player are displayed.
+Rooms visited by the player Shah Rukh Khan are : 
+Treasure room
+
+
+ It's your turn Shah Rukh Khan
+An item is picked by the player.
+Arrow has been picked by the player Shah Rukh Khan
+
+
+For a random space players present in the room are displayed.
+Players present in the room Movie theatre are: 
+Kartik Aryan
+
+
+ It's your turn Akshay Kumar
+An item is picked by the player.
+Sword has been picked by the player Akshay Kumar
+
+
+For a random space players present in the room are displayed.
+Players present in the room kitchen are: 
+Ram Charan
+
+
+ It's your turn Paresh Raval
+An item is picked by the player.
+Taser has been picked by the player Paresh Raval
+
+
+A random players details are displayed.
+Player name: Kartik Aryan
+Items List : 
+You haven't picked any items yet.
+Player current space : Library 2
+
+
+ It's your turn Kartik Aryan
+This moves the player to one of the neighbouring spaces.
+Neighbouring spaces for Library 2 of the player Kartik Aryan are : 
+
+9 : kitchen 
+
+10 : Dining room
+
+13 : Living room
+
+22 : Servant rooms
+Enter the room id of the room you wish to go to : 
+Player Kartik Aryan has moved to the room kitchen 
+Palkan Motwani has moved from : Gym  to : Guest room 
+
+A random players details are displayed.
+Player name: Kartik Aryan
+Items List : 
+You haven't picked any items yet.
+Player current space : Library 2
+
+
+ It's your turn Ram Charan
+This moves the player to one of the neighbouring spaces.
+Neighbouring spaces for Gym  of the player Ram Charan are : 
+
+0 : Nursery
+
+2 : Guest room 
+
+4 : Treasure room
+
+5 : Practice room
+Enter the room id of the room you wish to go to : 
+Player Ram Charan has moved to the room Nursery
+Palkan Motwani has moved from : Guest room  to : Master suites
+
+A random players details are displayed.
+Player name: Akshay Kumar
+Items List : 
+Item : Sword
+Player current space : Movie theatre 
+
+
+ It's your turn Shah Rukh Khan
+Neighbours of the space the player currently is in are displayed.
 Neighbours for this room are : 
 Room : Nursery with room id: 0
 Room : Gym  with room id: 1
@@ -84,23 +363,72 @@ Room : Craft room with room id: 6
 Room : Movie theatre  with room id: 7
 
 
-Menu
+For a random space players present in the room are displayed.
+Players present in the room Movie theatre are: 
+Paresh Raval
 
 
-1. Move Character
-2. Image Output
-3. Display room
-4. Display neighbours of room
-5. Exit menu
-2
-The world image display
+ It's your turn Akshay Kumar
+This moves the player to one of the neighbouring spaces.
+Neighbouring spaces for Movie theatre  of the player Akshay Kumar are : 
+
+4 : Treasure room
+
+5 : Practice room
+
+6 : Craft room
+
+8 : Library 
+
+9 : kitchen 
+
+10 : Dining room
+
+11 : Office 
+Enter the room id of the room you wish to go to : 
+Player Akshay Kumar has moved to the room kitchen 
+Palkan Motwani has moved from : Master suites to : Treasure room
+
+For a random space players present in the room are displayed.
+Players present in the room kitchen are: 
+Shah Rukh Khan
 
 
-Menu
+ It's your turn Paresh Raval
+This moves the player to one of the neighbouring spaces.
+Neighbouring spaces for kitchen  of the player Paresh Raval are : 
+
+6 : Craft room
+
+7 : Movie theatre 
+
+10 : Dining room
+
+12 : Library 2
+
+13 : Living room
+Enter the room id of the room you wish to go to : 
+Player Paresh Raval has moved to the room Movie theatre 
+Palkan Motwani has moved from : Treasure room to : Practice room
+
+For a random space players present in the room are displayed.
+Players present in the room Library 2are: 
+Paresh Raval
 
 
-1. Move Character
-2. Image Output
-3. Display room
-4. Display neighbours of room
-5. Exit menu
+ It's your turn Kartik Aryan
+Neighbours of the space the player currently is in are displayed.
+Neighbours for this room are : 
+Room : kitchen  with room id: 9
+Room : Dining room with room id: 10
+Room : Living room with room id: 13
+Room : Servant rooms with room id: 22
+
+
+A random players details are displayed.
+Player name: Kartik Aryan
+Items List : 
+You haven't picked any items yet.
+Player current space : Library 2
+
+
