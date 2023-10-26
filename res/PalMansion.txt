@@ -1,0 +1,52 @@
+36 39 Pal's Mansion
+100 Palkan Motwani
+23
+0 3 8 12 Nursery
+2 12 5 21 Gym 
+2 21 5 30 Guest room 
+0 30 8 39 Master suites
+5 12 8 21 Treasure room
+5 21 8 30 Practice room
+8 9 11 15 Craft room
+8 15 11 27 Movie theatre 
+8 27 11 33 Library 
+11 12 21 15 kitchen 
+11 15 21 27 Dining room
+11 27 21 30 Office 
+21 9 24 15 Library 2
+21 15 28 27 Living room
+28 15 30 27 Tennis court 
+21 27 24 33 Secret room
+24 27 27 33 Wine seller 
+30 6 36 12 Storage
+30 12 36 18 Parlour 
+30 18 36 24 Pizza
+30 24 36 30 Work shop 
+30 30 36 36 Green House
+24 9 27 15 Servant rooms
+25
+7 6 Sword
+4 7 Arrow
+6 8 Bow
+4 9 Wand
+1 1 Poison
+7 9 Katana sword
+8 15 Knife
+8 19 Revolver
+6 12 Magic Potion
+12 11 Laser gun
+16 5 Badger Saw
+19 6 Bomb
+20 7 Excavator
+3 9 Blade
+9 12 Taser
+10 15 Rifle
+13 23 Heavanly Sword
+18 14 Cannon
+5 9 Hammer
+16 20 Chainsaw
+12 11 Hyper Beam
+21 30 Pandora
+20 22 Bag of Gold
+22 19 Cursed item
+1 9 Healing Potion
