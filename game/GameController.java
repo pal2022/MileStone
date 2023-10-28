@@ -1,6 +1,7 @@
 package game;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 import view.WorldImage;
 import world.Mansion;
@@ -15,17 +16,14 @@ public class GameController implements GameControllerInterface {
 
   Scanner scanner = new Scanner(System.in);
   Mansion world;
-  WorldImage display = new WorldImage(world);
-  int roomId;
-  String playerName;
-  int maxTurns;
-  String filePath;
+  WorldImage display;
+  private int roomId;
+  private String playerName;
+  private int maxTurns;
+  private String filePath;
   Player player;
 
-  //for game controller test
-  public GameController(MockMansion mockMansion) {
-  }
-
+  
   /**
    * This contructor takes mansion object and max number of turns.
    * @param world Mansion object
@@ -37,6 +35,10 @@ public class GameController implements GameControllerInterface {
     this.maxTurns = maxTurns;
     this.player = new Player(playerName, roomId, world);
     this.filePath = filePath;
+    this.display = new WorldImage(world);
+  }
+
+  public GameController(MockMansion mockMansion) {
   }
 
   /**
@@ -66,26 +68,39 @@ public class GameController implements GameControllerInterface {
       world.addPlayer(player);
     }
 
+    Player computerPlayer = new Player("Computer player", 1, world);
+    world.addPlayer(computerPlayer);
     player = world.getCurrentPlayer();
-
-    while (true) {
+    int turn = 0;
+    while (turn < maxTurns) {
       displayMenu();
       try {
-        
+        int choice;
         System.out.println(" It's your turn " + player.getName());
         if (world.getTurnNumber() > maxTurns) {
           System.out.println("You have exceeded turn limit");
           break;
         }
-        int choice = scanner.nextInt();
+        
+        if (player.getName().equals("Computer player")) {
+          Random random = new Random();
+          choice = random.nextInt(1,3);  
+        } else {
+          choice = scanner.nextInt();
+        }
         switch (choice) {
           case 1:
-            player.move(world, roomId, player);
+            if (player.getName().equals("Computer player")) {
+              computerPlayer.computerMove(world, roomId, computerPlayer);
+            } else {
+              player.move(world, roomId, player);
+            }
             System.out.print(world.targetCharacter.getName() + " has moved from : "
                 + world.getTargetRoomName());
             world.targetCharacter.movePlayer();
             System.out.print(" to : " + world.getTargetRoomName());
             player = world.playerTurn();
+            turn = turn + 1;
             break;
          
           case 2:
@@ -95,6 +110,7 @@ public class GameController implements GameControllerInterface {
                 + world.getTargetRoomName());
             world.targetCharacter.movePlayer();
             System.out.print(" to : " + world.getTargetRoomName());
+            turn = turn + 1;
             break;
           
           case 3:
@@ -104,6 +120,7 @@ public class GameController implements GameControllerInterface {
                 + world.getTargetRoomName());
             world.targetCharacter.movePlayer();
             System.out.print(" to : " + world.getTargetRoomName());
+            turn = turn + 1;
             break;
           
           case 4:
@@ -135,12 +152,12 @@ public class GameController implements GameControllerInterface {
             System.out.println("Enter space id ");
             int id = scanner.nextInt();
             System.out.println("Players present in the room " + player.playerSpace().getName() 
-                +  "are: ");
+                +  " are: ");
             for (Player player : player.world.players) {
               if (player.playerSpace().getId() == id) {
                 System.out.println(player.getName());
               }
-            }
+            } 
             break;
           
           case 9:
@@ -156,7 +173,6 @@ public class GameController implements GameControllerInterface {
             System.out.println("Invalid input.");
           
         }
-        
       } catch (InputMismatchException e) {
         System.out.println("Invalid input.");
         scanner.nextLine();  
