@@ -5,12 +5,7 @@ package world;
  */
 public interface CharacterInterface {
   
-  /**
-   * This method is used to pass the information from the text file to the fields of the class.
-   * @param characterInfo stores the information of the line from the text file that holds the 
-   *     information of the character.
-   */
-  void parseCharacterInformation(String characterInfo);
+  boolean tcDead = false;
 
   /**
    * This method is used to move the target character from one space to the next space.
@@ -34,5 +29,17 @@ public interface CharacterInterface {
    * @return room id
    */
   int getRoomId();
+  
+  /**
+   * This method decreases the health of the target character.
+   * @param damage the amount of health to be reduced
+   */
+  void takenDamage(int damage);
+
+  /**
+   * This method is for knowing if target is dead or not.
+   * @return true if target is dead else false
+   */
+  boolean tcDead();
     
 }
