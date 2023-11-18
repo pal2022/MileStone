@@ -1,7 +1,11 @@
 package game;
 
+import java.io.InputStream;
+
+import world.MansionInterface;
+
 /**
- * This is the interface for the gamecontroller.
+ * This is the interface for the game controller.
  */
 public interface GameControllerInterface {
   
@@ -10,15 +14,15 @@ public interface GameControllerInterface {
    * @return file path
    */
   public String getFilePath();
-  
-  /**
-   * This method starts the game.
-   */
-  public void startGame();
-  
+ 
   /**
    * Menu show list of operations that can be performed by the user.
    */
   public void displayMenu();
-  
+
+  /**
+   * This method starts the game.
+   */
+  void startGame(MansionInterface world);
+
 }

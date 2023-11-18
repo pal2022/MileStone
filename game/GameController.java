@@ -1,12 +1,16 @@
 package game;
 
+import java.io.InputStream;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 import view.WorldImage;
-import world.Mansion;
+import world.CharacterImpl;
+import world.CharacterPetImpl;
+import world.MansionImpl;
+import world.MansionInterface;
 import world.MockMansion;
-import world.Player;
+import world.PlayerImpl;
 import world.WorldBuilder;
 
 /**
@@ -15,30 +19,26 @@ import world.WorldBuilder;
 public class GameController implements GameControllerInterface {
 
   Scanner scanner = new Scanner(System.in);
-  Mansion world;
+  MansionInterface world;
+  CharacterPetImpl pet;
+  PlayerImpl player;
   WorldImage display;
   private int roomId;
   private String playerName;
   private int maxTurns;
   private String filePath;
-  Player player;
+  
 
   
   /**
    * This contructor takes mansion object and max number of turns.
-   * @param world Mansion object
-   * @param maxTurns maxt number of turns allowed
+   * @param maxTurns max number of turns allowed
    * @param filePath file path of the text file
    */
-  public GameController(Mansion world, int maxTurns, String filePath) {
-    this.world = world;
+  public GameController(int maxTurns, String filePath) {
     this.maxTurns = maxTurns;
-    this.player = new Player(playerName, roomId, world);
+    this.player = new PlayerImpl(playerName, roomId, world);
     this.filePath = filePath;
-    this.display = new WorldImage(world);
-  }
-
-  public GameController(MockMansion mockMansion) {
   }
 
   /**
@@ -54,118 +54,139 @@ public class GameController implements GameControllerInterface {
    * This method starts the game.
    */
   @Override
-  public void startGame() {
+  public void startGame(MansionInterface world) {
+    this.display = new WorldImage(world);
     System.out.println("Game Starts!");
     System.out.println("Enter the number of players playing the game: ");
-    int numPlayers = scanner.nextInt();
-    
+    int numPlayers = 0;
+    while (true) {
+      try {
+        numPlayers = scanner.nextInt();
+        if (numPlayers >= 0 && numPlayers <= 10) {
+          break;
+        } else {
+          System.out.println("Invalid input. Number of players must be between 0 and 10.");
+        }
+      } catch (InputMismatchException e) {
+        System.out.println("Invalid input. Please enter a valid integer.");
+        scanner.nextLine();
+      }
+    }
+
     for (int i = 0; i < numPlayers; i++) {
       System.out.println("Enter player name : ");
       playerName = scanner.next();
       System.out.println("Enter starting room id : ");
-      roomId = scanner.nextInt();
-      Player player = new Player(playerName, roomId, world);
+      while (true) {
+        try {
+          roomId = scanner.nextInt();
+          if (roomId >= 0 && roomId < (world.getRoomCount() - 1)) {
+            break;
+          } else {
+            System.out.println("Invalid input. Room must be between 0 and "
+                + (world.getRoomCount() - 1));
+          }
+        } catch (InputMismatchException e) {
+          System.out.println("Invalid input. Please enter a valid integer.");
+          scanner.nextLine();
+        }
+      }
+      PlayerImpl player = new PlayerImpl(playerName, roomId, world);
       world.addPlayer(player);
     }
 
-    Player computerPlayer = new Player("Computer player", 1, world);
+    PlayerImpl computerPlayer = new PlayerImpl("Computer player", 5, world);
     world.addPlayer(computerPlayer);
     player = world.getCurrentPlayer();
     int turn = 0;
+    
     while (turn < maxTurns) {
       displayMenu();
       try {
+        world.checkIfRoomMatchesWithTc(player);
         int choice;
-        System.out.println(" It's your turn " + player.getName());
-        if (world.getTurnNumber() > maxTurns) {
-          System.out.println("You have exceeded turn limit");
-          break;
-        }
+        System.out.println("It's your turn " + player.getName());
         
         if (player.getName().equals("Computer player")) {
           Random random = new Random();
-          choice = random.nextInt(1,3);  
+          choice = random.nextInt(1, 5);  
         } else {
           choice = scanner.nextInt();
+          scanner.nextLine();
         }
+        String tcName = world.getTargetName();
         switch (choice) {
           case 1:
-            if (player.getName().equals("Computer player")) {
-              computerPlayer.computerMove(world, roomId, computerPlayer);
-            } else {
-              player.move(world, roomId, player);
-            }
-            System.out.print(world.targetCharacter.getName() + " has moved from : "
+            player.move(world, roomId, player);
+            System.out.print("\n" + tcName + " has moved from : "
                 + world.getTargetRoomName());
-            world.targetCharacter.movePlayer();
+            world.moveTarget();
             System.out.print(" to : " + world.getTargetRoomName());
+            System.out.println("\nPet moves from " + world.getRoomWithId(world.getPetRoomId()));
+            world.movePet();
+            System.out.println(" to " + world.getRoomWithId(world.getPetRoomId()));
             player = world.playerTurn();
             turn = turn + 1;
             break;
          
           case 2:
-            player.pickItem();
+            player.pickItem(player);
             player = world.playerTurn();
-            System.out.print(world.targetCharacter.getName() + " has moved from : "
-                + world.getTargetRoomName());
-            world.targetCharacter.movePlayer();
+            System.out.print("\n" + tcName + " has moved from : "
+                    + world.getTargetRoomName());
+            world.moveTarget();
             System.out.print(" to : " + world.getTargetRoomName());
+            System.out.println("\nPet moves from " + world.getRoomWithId(world.getPetRoomId()));
+            world.movePet();
+            System.out.println(" to " + world.getRoomWithId(world.getPetRoomId()));
             turn = turn + 1;
             break;
           
           case 3:
-            player.displayNearbySpace(player);
+            String lookAroundInfo = world.lookAround(player.playerSpace());
+            System.out.println(lookAroundInfo);
             player = world.playerTurn();
-            System.out.print(world.targetCharacter.getName() + " has moved from : "
-                + world.getTargetRoomName());
-            world.targetCharacter.movePlayer();
+            System.out.print("\n" + tcName + " has moved from : "
+                    + world.getTargetRoomName());
+            world.moveTarget();
             System.out.print(" to : " + world.getTargetRoomName());
+            System.out.println("\nPet moves from " + world.getRoomWithId(world.getPetRoomId()));
+            world.movePet();
+            System.out.println(" to " + world.getRoomWithId(world.getPetRoomId()));
             turn = turn + 1;
             break;
           
           case 4:
-            player.displayPickedItems();
+            System.out.println("Player " + player.getName() + " you have chosen to "
+                + "attack the target character.");
+            player.world.attackTarget(player);
+            player = world.playerTurn();
+            System.out.print("\n" + tcName + " has moved from : "
+                    + world.getTargetRoomName());
+            world.moveTarget();
+            System.out.print(" to : " + world.getTargetRoomName());
+            turn = turn + 1;
             break;
-          
+            
           case 5:
-            player.displaySpacePath();
+            System.out.println("Enter room id of the room where you want to move the pet.");
+            int roomId = scanner.nextInt();
+            world.movePet(roomId);
+            System.out.println("Pet has been moved to the room: " + world.getRoomWithId(roomId));
+            player = world.playerTurn();
+            System.out.print("\n" + tcName + " has moved from : "
+                    + world.getTargetRoomName());
+            world.moveTarget();
+            System.out.print(" to : " + world.getTargetRoomName());
+            turn = turn + 1;
             break;
-        
-          case 6 :
-            System.out.println("Enter player name: ");
-            String playerName = scanner.next();
-            for (Player player1 : world.players) {
-              if (player1.getName().equals(playerName)) {
-                System.out.println("Player name: " + player1.getName());
-                System.out.println("Items List : ");
-                player1.displayPickedItems();
-                System.out.println("Player current space : " + player1.playerSpace().getName());
-              }
-            }
-            break;
-          
-          case 7:
-            world.displayPlayers();
-            break;
-          
-          case 8:
-            System.out.println("Enter space id ");
-            int id = scanner.nextInt();
-            System.out.println("Players present in the room " + player.playerSpace().getName() 
-                +  " are: ");
-            for (Player player : player.world.players) {
-              if (player.playerSpace().getId() == id) {
-                System.out.println(player.getName());
-              }
-            } 
-            break;
-          
-          case 9:
+           
+          case 6:
             System.out.println("World Image");
             display.saveImage("C:/Users/hp/Downloads/image.png");
             break;
             
-          case 10:
+          case 7:
             System.out.println("You have exited the game");
             return;
           
@@ -177,6 +198,15 @@ public class GameController implements GameControllerInterface {
         System.out.println("Invalid input.");
         scanner.nextLine();  
       }
+      String gameEndMessage = world.gameEnd();
+      if (!gameEndMessage.isEmpty()) {
+        System.out.println(gameEndMessage);
+        return; 
+      }
+      if (turn == maxTurns) {
+        System.out.println("\nMaximum number of turns reached");
+      }
+      
     }
   }
 
@@ -189,13 +219,11 @@ public class GameController implements GameControllerInterface {
     System.out.println("1. Move");
     System.out.println("2. Pick Item");
     System.out.println("3. Look around");
-    System.out.println("4. Display picked items");
-    System.out.println("5. Display player path");
-    System.out.println("6. Display specific player information");
-    System.out.println("7. Display all players information");
-    System.out.println("8. Display players in a space using the space id");
-    System.out.println("9. WorldImage");
-    System.out.println("10. Exit Game");
+    System.out.println("4. Attack target character");
+    System.out.println("5. Move pet");
+    System.out.println("6. WorldImage");
+    System.out.println("7. Exit Game");
+    
   }
 
-}
+} 
