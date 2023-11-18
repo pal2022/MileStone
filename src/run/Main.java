@@ -1,16 +1,15 @@
 package run;
 
-
 import game.ComputerControlledGame;
 import game.GameController;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import view.WorldImage;
-import world.Mansion;
-import world.Player;
-import world.Space;
+import world.CharacterPetImpl;
+import world.MansionImpl;
+import world.PlayerImpl;
+import world.SpaceImpl;
 import world.WorldBuilder;
-//import world.MockMansion;
 
 /**
  * This is the main class for running the application.
@@ -35,14 +34,13 @@ public class Main {
     String filePath = args[0];
     int maxTurns = Integer.parseInt(args[1]);
 
-    Mansion world = WorldBuilder.build(filePath);
+    MansionImpl world = WorldBuilder.build(filePath, maxTurns);
   
-    GameController game = new GameController(world, maxTurns, filePath);
+    GameController game = new GameController(maxTurns, filePath);
 
-    game.startGame();
-    //    ComputerControlledGame cGame = new ComputerControlledGame();
-  
-   
-    //       cGame.startGame();
+    game.startGame(world);
+    
+    ComputerControlledGame cGame = new ComputerControlledGame();
+    cGame.startGame();
   }
 }
