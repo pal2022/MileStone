@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -10,12 +11,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import world.Character;
-import world.Item;
-import world.Mansion;
-import world.Player;
+import world.CharacterImpl;
+import world.ItemImpl;
+import world.MansionImpl;
+import world.MansionInterface;
+import world.PlayerImpl;
 import world.PlayerInterface;
-import world.Space;
+import world.SpaceImpl;
 
 
 /**
@@ -23,18 +25,18 @@ import world.Space;
  */
 public class WorldImage extends JPanel {
 
-  Mansion world;
+  MansionInterface world;
   BufferedImage latestImage;
   JFrame frame;
-  Player player;
-  Character targetCharacter;
+  PlayerImpl player;
+  CharacterImpl targetCharacter;
   
   /**
    * Takes the object of class Mansion to create an image.
-   * @param mansion object of class mansion
+   * @param world2 object of class mansion
    */
-  public WorldImage(Mansion mansion) {
-    this.world = mansion;
+  public WorldImage(MansionInterface world2) {
+    this.world = world2;
   } 
 
   /**
@@ -64,7 +66,10 @@ public class WorldImage extends JPanel {
    * @return image
    */
   public Image buildImage() {
-    int s = 20;
+    if (this.world == null) {
+      throw new IllegalStateException("World data is not initialized.");
+    }
+    int s = 25;
     BufferedImage img = new BufferedImage(this.world.getColumns() * s, this.world.getRows() * s,
         BufferedImage.TYPE_INT_RGB);
     Graphics g = img.getGraphics();
@@ -72,10 +77,11 @@ public class WorldImage extends JPanel {
 
     g.setColor(java.awt.Color.black);
     for (int i = 0; i < this.world.getRoomCount(); i++) {
-      Space room = this.world.rooms.get(i);
+      SpaceImpl room = this.world.getRooms().get(i);
       int width = room.getX2() - room.getX1();
       int height = room.getY2() - room.getY1();
 
+      g.setColor(Color.black);
       g.drawRect(room.getY1() * s, room.getX1() * s, height * s, width * s);
       FontMetrics fm = g.getFontMetrics();
       //sw string width sh string height
@@ -83,23 +89,33 @@ public class WorldImage extends JPanel {
       int sh = fm.getAscent();
       int sx1 = ((room.getX2() + room.getX1()) * s) / 2;
       int sy1 = ((room.getY1()) * s) + 1; 
+      g.setColor(Color.black);
       g.drawString(room.getName(), sy1, sx1);
       
-      for (Item item : room.getItems()) {
+      for (ItemImpl item : room.getItems()) {
+        g.setColor(Color.red);
         g.drawString(item.getName(),  sy1,  sx1 + sh);
         sx1 += sh;
       }
       
       //pw playername width ph playername height
-      for (PlayerInterface player : world.players) {
+      for (int i2 = 0; i2 < world.getPlayers().size(); i2++) {
+        PlayerInterface player = (PlayerInterface) world.getPlayers().get(i2);
         if (room.getId() == player.playerSpace().getId()) {
+          g.setColor(Color.orange);
           g.drawString(player.getName(),  sy1,  sx1 + sh);
           sx1 += sh;  
         }
       }
       
-      if (room.getId() == world.targetCharacter.getRoomId()) {
-        g.drawString(world.targetCharacter.getName(),  sy1,  sx1 + sh);
+      if (room.getId() == world.getTargetRoomId()) {
+        g.setColor(Color.blue);
+        g.drawString(world.getTargetName(),  sy1,  sx1 + sh);
+      }
+      
+      if (room.getId() == world.getPetRoomId()) {
+        g.setColor(Color.blue);
+        g.drawString(world.getPetName(),  sy1,  sx1 + 2 * sh);
       }
       
     }
