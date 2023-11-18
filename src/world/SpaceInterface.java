@@ -17,25 +17,19 @@ public interface SpaceInterface {
    * This method is for adding neighbours to the room.
    * @param room room of the mansion
    */
-  void addNeighbour(Space room);
+  void addNeighbour(SpaceImpl room);
   
   /**
    * This method is for adding item in the room.
    * @param item item of the room
    */
-  void addItem(Item item);
-  
-  void removeItem(Item item);
+  void addItem(ItemImpl item);
   
   /**
-   * This method is for displaying information of the room.
+   * This method is for removing item from the room.
+   * @param item item to be removed
    */
-  void displayInformation();
-    
-  /**
-   * The method is for displaying neighbours of the room.
-   */
-  void displayNeighbours();
+  void removeItem(ItemImpl item);
   
   /**
    * Returns the x1 coordinate of the space.
@@ -90,6 +84,6 @@ public interface SpaceInterface {
    * 
    * @return items
    */
-  List<Item> getItems();
-    
+  List<ItemImpl> getItems();
+
 }
