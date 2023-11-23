@@ -1,0 +1,131 @@
+Enter file path and max number of turns
+Game Starts!
+Enter the number of players playing the game: 
+1
+Enter player name : 
+p
+Enter starting room id : 
+0
+
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+11. Attack target character
+ It's your turn p
+2
+Bag of Gold has been picked by the player p
+Palkan Motwani has moved from : Nursery to : Nursery
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+11. Attack target character
+ It's your turn p
+11
+List of items : 
+1 Item : Bag of Gold, damage : 22
+1
+p, you have attacked the target character Palkan Motwani with the item Bag of Gold
+Current health of target character is 78
+
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+11. Attack target character
+ It's your turn Computer player
+Poison has been picked by the player Computer player
+Palkan Motwani has moved from : Gym  to : Gym 
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+11. Attack target character
+ It's your turn Computer player
+Healing Potion has been picked by the player Computer player
+Palkan Motwani has moved from : Gym  to : Gym 
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+11. Attack target character
+ It's your turn Computer player
+Neighbouring spaces for Gym  of the player Computer player are : 
+
+0 : Nursery
+
+2 : Guest room 
+
+4 : Treasure room
+
+5 : Practice room
+Enter the room id of the room you wish to go to : 
+Player Computer player has moved to the room Treasure room
+Palkan Motwani has moved from : Gym  to : Guest room 
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Display picked items
+5. Display player path
+6. Display specific player information
+7. Display all players information
+8. Display players in a space using the space id
+9. WorldImage
+10. Exit Game
+11. Attack target character
+ It's your turn p
