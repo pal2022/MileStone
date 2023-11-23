@@ -1,0 +1,245 @@
+Enter file path and max number of turns
+Game Starts!
+Enter the number of players playing the game: 
+2
+Enter player name : 
+palkan
+Enter starting room id : 
+0
+Enter player name : 
+devika
+Enter starting room id : 
+16
+
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+Player palkan you are in the same room as the target character Palkan Motwani
+Do you wish to attack the target character?
+Enter y for yes and n for no!
+y
+Player palkan , you have no items.
+Default attack : poking him in the eye!
+It's your turn palkan
+1
+Neighbouring spaces for Nursery of the player palkan are : 
+
+1 : Gym 
+
+4 : Treasure room
+
+6 : Craft room
+Enter the room id of the room you wish to go to : 
+6
+Player palkan has moved to the room Craft room
+
+Palkan Motwani has moved from : Nursery to : Gym 
+Pet moves from Nursery
+ to Gym 
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+It's your turn devika
+2
+Badger Saw has been picked by the player devika
+
+Palkan Motwani has moved from : Gym  to : Guest room 
+Pet moves from Gym 
+ to Nursery
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+It's your turn Computer player
+Player Computer player you have chosen to attack the target character.
+You are not in the same room as the target character. You cannot attack the target character.
+Target character room id : 2
+ Player room id5
+Palkan Motwani has moved from : Guest room  to : Master suites
+Pet moves from Nursery
+ to Treasure room
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+It's your turn palkan
+3
+Name of the room is Craft room
+Items present in this room are:
+Bow
+Magic Potion
+
+No room through the left window.
+Right window view: Room : Movie theatre  with room id: 7
+Players present in this room are:Player palkan
+
+Palkan Motwani has moved from : Master suites to : Treasure room
+Pet moves from Treasure room
+ to Practice room
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+It's your turn devika
+4
+Player devika you have chosen to attack the target character.
+You are not in the same room as the target character. You cannot attack the target character.
+Target character room id : 4
+ Player room id16
+Palkan Motwani has moved from : Treasure room to : Practice room
+Pet moves from Practice room
+ to Guest room 
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+Player Computer player you are in the same room as the target character Palkan Motwani
+Do you wish to attack the target character?
+Enter y for yes and n for no!
+n
+You have missed a great oppurtunity.
+It's your turn Computer player
+Player Computer player you have chosen to attack the target character.
+Player Computer player , you have no items.
+Default attack : poking him in the eye!
+
+Palkan Motwani has moved from : Practice room to : Craft room
+Pet moves from Guest room 
+ to Master suites
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+Player palkan you are in the same room as the target character Palkan Motwani
+Do you wish to attack the target character?
+Enter y for yes and n for no!
+5
+How can you miss this opportunity by not typing the 'y'?
+It's your turn palkan
+5
+Enter room id of the room where you want to move the pet.
+5
+Pet has been moved to the room: Practice room
+
+Palkan Motwani has moved from : Craft room to : Movie theatre 
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+It's your turn devika
+2
+Chainsaw has been picked by the player devika
+
+Palkan Motwani has moved from : Movie theatre  to : Library 
+Pet moves from Practice room
+ to Movie theatre 
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+It's your turn Computer player
+Hammer has been picked by the player Computer player
+
+Palkan Motwani has moved from : Library  to : kitchen 
+Pet moves from Movie theatre 
+ to Craft room
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+It's your turn palkan
+6
+World Image
+Image saved
+
+
+Menu
+
+
+1. Move
+2. Pick Item
+3. Look around
+4. Attack target character
+5. Move pet
+6. WorldImage
+7. Exit Game
+It's your turn palkan
+2
+Bow has been picked by the player palkan
+
+Palkan Motwani has moved from : kitchen  to : Dining room
+Pet moves from Craft room
+ to kitchen 
+Maximum number of turns reached
