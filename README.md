@@ -51,5 +51,10 @@ Now the game starts. Enter the number of players to play the game and then write
 with the game by using options from menu.
 ![image](https://github.com/pal2022/MileStone/assets/132899382/13bda3ce-ffcf-4ccd-9ee0-b9bb73fbfc67)
 
+Citations
+I don't have specific links right now, but some of the websites I have referred are geeksforgeeks, stackoverflow, tutorialspoint.
+https://www.geeksforgeeks.org/
+https://stackoverflow.com/
+https://www.tutorialspoint.com/index.htm
 
 
