@@ -11,9 +11,10 @@ public class WorldBuilder {
   /**
    * This method passes the filepath from the main class.
    * @param filePath path of the text file.
+   * @param maxTurns max turns allowed
    * @return world object of Mansion class
    */
-  public static Mansion build(String filePath) {
+  public static MansionImpl build(String filePath, int maxTurns) {
 
     DocReader docreader = new DocReader(filePath);
 
@@ -21,7 +22,8 @@ public class WorldBuilder {
 
     String mansionInfo = strlist.get(0);
     String characterInfo = strlist.get(1);
-    String roomCountInfo = strlist.get(2);
+    String roomCountInfo = strlist.get(3);
+    String petInfo = strlist.get(2);
 
     String[] mansionInfoList = mansionInfo.split("\\s+", 3);
     int mansionRows = Integer.parseInt(mansionInfoList[0]);
@@ -29,26 +31,36 @@ public class WorldBuilder {
     String mansionName = mansionInfoList[2];
     
     int roomCount = Integer.parseInt(roomCountInfo);
-    //for skipping first 3 lines + the lines containing room information as next line has itemCount 
-    final int itemCount = Integer.parseInt(strlist.get(3 + roomCount));
-    Mansion world = new Mansion(mansionRows, mansionCols, roomCount, mansionName);
-    Character player = new Character(characterInfo, roomCount);
+    //for skipping first 4 lines + the lines containing room information as next line has itemCount 
+    final int itemCount = Integer.parseInt(strlist.get(4 + roomCount));
+    int health = 0;
+    String name = null;
+    try {
+      String[] characterInfoList = characterInfo.split("\\s+", 2);
+      health = Integer.parseInt(characterInfoList[0]);
+      name = characterInfoList[1];
+    } catch (NumberFormatException e) {
+      System.out.println("Invalid information" + characterInfo);
+    }
+    
+    CharacterImpl target = new CharacterImpl(health, name, roomCount);
+    CharacterPetImpl pet = new CharacterPetImpl(petInfo, roomCount);
 
-    world.assignCharacter(player);
+    MansionImpl world = new MansionImpl(mansionRows, mansionCols, roomCount, mansionName,
+        target, pet, maxTurns);
 
-    //in constructor of space
     for (int i = 0; i < roomCount; i++) {
-      Space room = new Space(i, strlist.get(i + 3));
+      SpaceImpl room = new SpaceImpl(i, strlist.get(i + 4));
       world.addRoom(room);
     }
     
     world.assignNeighbours();
 
     for (int i = 0; i < itemCount; i++) {
-      Item item = new Item(strlist.get(4 + roomCount + i));
+      ItemImpl item = new ItemImpl(strlist.get(5 + roomCount + i));
       int roomId = item.getRoomId();
       if (roomId >= 0 && roomId < roomCount) {
-        Space room = world.rooms.get(item.getRoomId());
+        SpaceImpl room = world.rooms.get(item.getRoomId());
         if (room != null) {
           item.assignRoom(room);
           room.addItem(item);
