@@ -9,17 +9,21 @@ import static org.junit.Assert.assertTrue;
 import game.GameController;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
-import world.Character;
-import world.Item;
+import world.CharacterImpl;
+import world.CharacterPetImpl;
+import world.ItemImpl;
+import world.MansionInterface;
 import world.MockMansion;
-import world.Player;
-import world.Space;
+import world.PlayerImpl;
+import world.SpaceImpl;
 
 /**
  * This is the junit test for game controller class.
@@ -27,53 +31,73 @@ import world.Space;
 public class GameControllerTest {
 
   
-  Character target;
-  Space room1;
-  Space room2;
-  Space room3;
-  Space room4;
-  Player player1;
-  Player player2;
-  List<Player> allPlayers;
+  CharacterImpl target;
+  CharacterPetImpl pet;
+  SpaceImpl room1;
+  SpaceImpl room2;
+  SpaceImpl room3;
+  SpaceImpl room4;
+  ItemImpl item1;
+  ItemImpl item2;
+  ItemImpl item3;
+  ItemImpl item4;
+  PlayerImpl player1;
+  PlayerImpl player2;
+  List<PlayerImpl> allPlayers;
+  Readable readable;
+  Appendable appendable;
+  String input;
   private GameController game;
-  private MockMansion mockMansion;
+  private MansionInterface mockMansion;
+  
+  
 
   /**
    * This is basic setup for test cases.
    */
   @Before
   public void setUp() {
-    mockMansion = new MockMansion();
-    target = new Character("100 TargetCharacter", 0);
+    input = "1\n" + "palkan\n" + "2\n" + Integer.parseInt("2") + "\n\n" 
+       + Integer.parseInt("2") + "\n";
+
+    InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+    InputStreamReader in = new InputStreamReader(inputStream);
+
+    System.setIn(inputStream);
+
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    PrintStream printStream = new PrintStream(outputStream);
+    mockMansion = new MockMansion(in, printStream, 3);
+    target = new CharacterImpl(100, "TargetCharacter", 0);
+    pet = new CharacterPetImpl("Pet", 22);
     allPlayers = new ArrayList<>();
+    ((MockMansion) mockMansion).assignCharacter(target);
+    ((MockMansion) mockMansion).assignPet(pet);
     
-    room1 = new Space(0, "0 3 8 12 Nursery");
-    room2 = new Space(1, "2 12 5 21 Gym");
-    room3 = new Space(2, "24 27 27 33 Wine seller");
-    room4 = new Space(3, "21 27 24 33 Secret room");
+    room1 = new SpaceImpl(0, "0 3 8 12 Nursery");
+    room2 = new SpaceImpl(1, "2 12 5 21 Gym");
+    room3 = new SpaceImpl(2, "24 27 27 33 Wine seller");
+    room4 = new SpaceImpl(3, "21 27 24 33 Secret room");
     
     mockMansion.addRoom(room1);
     mockMansion.addRoom(room2);
     mockMansion.addRoom(room3);
     mockMansion.addRoom(room4);
     
-    room1.getItems().add(new Item("1 9 Healing Potion"));
-    room2.getItems().add(new Item("1 9 Healing Potion"));
-    room3.getItems().add(new Item("1 9 Healing Potion"));
-    room4.getItems().add(new Item("1 9 Healing Potion"));
+    item1 = new ItemImpl("1 9 Healing Potion");
+    item2 = new ItemImpl("1 9 Healing Potion");
+    item3 = new ItemImpl("2 9 Healing Potion");
+    item4 = new ItemImpl("2 9 Healing Potion");
     
-    player1 = new Player("Player1", 1, mockMansion);
-    player2 = new Player("Player2", 2, mockMansion);
+    room2.addItem(item1);
+    room2.addItem(item2);
+    room3.addItem(item3);
+    room3.addItem(item4);
     
-    player1.setItems(new ArrayList<>());
-    player2.setItems(new ArrayList<>());
+    player1 = new PlayerImpl("Player1", 1, mockMansion);
+    player2 = new PlayerImpl("Player2", 2, mockMansion);
     
-    mockMansion.addPlayer(player1);
-    mockMansion.addPlayer(player2);
-    
-    mockMansion.assignCharacter(target);
-    game = new GameController(mockMansion);
-    
+    game = new GameController(10, "file.txt");
   }
   
   
@@ -82,7 +106,7 @@ public class GameControllerTest {
    */
   @Test
   public void testAddRoom() {
-    assertTrue(mockMansion.rooms.containsValue(room1));
+    assertTrue(mockMansion.getRooms().containsValue(room1));
   }
   
   /**
@@ -90,7 +114,8 @@ public class GameControllerTest {
    */
   @Test
   public void testAddPlayer() {
-    assertTrue(mockMansion.players.contains(player1));
+    mockMansion.addPlayer(player1);
+    assertTrue(mockMansion.getPlayers().contains(player1));
   }
   
   /**
@@ -99,7 +124,7 @@ public class GameControllerTest {
   @Test
   public void testAssignCharacter() {
     String expected = "TargetCharacter";
-    assertEquals(expected, mockMansion.targetCharacter.getName());
+    assertEquals(expected, mockMansion.getTargetName());
   }
 
   /**
@@ -126,7 +151,7 @@ public class GameControllerTest {
   @Test
   public void testGetRooms() {
     String expected = "{0=Nursery, 1=Gym, 2=Wine seller, 3=Secret room}";
-    assertEquals(expected, mockMansion.rooms.toString());
+    assertEquals(expected, mockMansion.getRooms().toString());
   }
   
   /**
@@ -143,18 +168,17 @@ public class GameControllerTest {
    */
   @Test
   public void testPlayerTurn() {
+    mockMansion.addPlayer(player1);
+    mockMansion.addPlayer(player2);
     assertEquals(player2, mockMansion.playerTurn());
     assertEquals(player1, mockMansion.playerTurn());
     assertEquals(player2, mockMansion.playerTurn());
     assertEquals(player1, mockMansion.playerTurn());
   }
 
-  //test if game starts correctly
   @Test
   public void testGameStart() {
     assertEquals(1, mockMansion.getTurnNumber());
-    assertEquals(mockMansion.players.get(0), mockMansion.getCurrentPlayer());
-    assertNotNull(mockMansion.targetCharacter);
     assertEquals(4, mockMansion.getRoomCount());
   }
   
@@ -174,7 +198,7 @@ public class GameControllerTest {
    */
   @Test
   public void testAssignNeighbours() {
-    Space room5 = new Space(4, "8 9 11 15 Craft room");
+    SpaceImpl room5 = new SpaceImpl(4, "8 9 11 15 Craft room");
     mockMansion.addRoom(room5);
     mockMansion.assignNeighbours();
     assertTrue(room1.getNeighbours().contains(room5));
@@ -210,5 +234,19 @@ public class GameControllerTest {
     System.setOut(ps2);
     assertEquals("", baos.toString().trim());
   }
-    
+  
+  @Test
+  public void loopEndsWhenMaxTurnsReached() {
+    mockMansion.addPlayer(player1);
+    mockMansion.addPlayer(player2);
+    InputStream inputStream = new ByteArrayInputStream(input.getBytes());
+    InputStream systemIn = System.in;
+    try {
+      System.setIn(inputStream);
+      game.startGame(mockMansion);     
+    } finally {
+      System.setIn(systemIn);
+    }
+  }
+  
 }
