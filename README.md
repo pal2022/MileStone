@@ -26,17 +26,30 @@ ASSUMPTIONS for the game
 -The game has exceptions to handle the invalid inputs of the user
 -It is a text based game.
 -The world image file shows the spaces, items and for the players and the target character in their current room.
+MileStone 3 assumptions
+- Players are given an extra oppurtunity to attack the target if they coincidently come to the same room as the player.
+- When using looking around command player can only see left and right neighbours of all the neighbours of that room assuming there are only two windows, one on the left wall and one on the right wall.
+- Now the window on the left is assumed to to bigger hence player can also see the items present in the same room.
+- The player having the most point/ causing most damage to the target wins the game.
+- When printing the neighbours of a room if one of the neighbours has pet then it is not printed.
+- After attacking the target the item used to attack the target is removed from the player's inventory.
+- If player chooses to attack the target but doen't have any item then default attack poking him in the eye causing 1 damage to the target occurs.
+- The target character excapes if maximum number of turns is reached and it's health is greater than 0.
+- The game ends even if the max turns not reached but the target character dies.
+- The maxturns of the game is not decided by the users.
+- Players cannot attack the target if they are watched by other players.
 
 
 HOW TO RUN JAR FILE
-Milestone2.jar jar file
+Milestone3.jar jar file
 The jar file is designed to execute the game. It is a text based game.
 It has both human players and computer controlled players.
 How to execute jar file
-java -jar Milestone2.jar C:\Users\hp\eclipse-workspace\lab00_getting_started\MileStone1\model\src\run\PalMansion.txt  20
+java -jar Milestone3.jar C:\Users\hp\eclipse-workspace\lab00_getting_started\MileStone1\model\src\run\PalMansion.txt  20
 The file path and max number of turns are required when running the jar file.
 Now the game starts. Enter the number of players to play the game and then write their name and the space id to continue 
 with the game by using options from menu.
-![image](https://github.com/pal2022/MileStone/assets/132899382/ad56348b-da46-4a04-8a7b-96be495f7a15)
+![image](https://github.com/pal2022/MileStone/assets/132899382/13bda3ce-ffcf-4ccd-9ee0-b9bb73fbfc67)
+
 
 
