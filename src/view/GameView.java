@@ -115,13 +115,19 @@ public class GameView extends JFrame implements GameViewInterface {
   @Override
   public int promptForNumberOfPlayers() {
     while (true) {
-      String numPlayersStr = JOptionPane.showInputDialog(this,
-          "Enter the number of players (1-9):");
-      int numPlayers = Integer.parseInt(numPlayersStr);
-      if (numPlayers >= 1 && numPlayers <= 9) {
-        return numPlayers;
-      } else {
-        displayErrorMessage("Number of players must be between 1 and 9.");
+      try {
+        String numPlayersStr = JOptionPane.showInputDialog(this,
+            "Enter the number of players (1-9):");
+        int numPlayers = Integer.parseInt(numPlayersStr);
+        if (numPlayers >= 1 && numPlayers <= 9) {
+          return numPlayers;
+        } else {
+          displayErrorMessage("Number of players must be between 1 and 9.");
+        }
+      } catch (HeadlessException e) {
+        e.printStackTrace();
+      } catch (NumberFormatException e) {
+        e.printStackTrace();
       }
     } 
   }
