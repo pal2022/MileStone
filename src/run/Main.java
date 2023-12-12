@@ -1,14 +1,10 @@
 package run;
 
-import game.ComputerControlledGame;
 import game.GameController;
-import java.util.InputMismatchException;
+import game.GuiGameController;
 import java.util.Scanner;
-import view.WorldImage;
-import world.CharacterPetImpl;
-import world.MansionImpl;
-import world.PlayerImpl;
-import world.SpaceImpl;
+import view.GameView;
+import world.MansionInterface;
 import world.WorldBuilder;
 
 /**
@@ -17,30 +13,51 @@ import world.WorldBuilder;
 public class Main {
 
   /**
-   * This method read data from the text file. The data is then used in different classes for
-   * the respective tasks. Here there are four options for calling four methods called 
-   * in this class.
+   * This method read data from the text file. The data is then used in different
+   * classes for the respective tasks. Here there are four options for calling
+   * four methods called in this class.
+   * 
    * @param args pass parameters from command-in-line argument.
    */
   public static void main(String[] args) {
 
-    //C:\Users\hp\eclipse-workspace\lab00_getting_started\MileStone1\model\src\run\PalMansion.txt
+    String filePath = "C:\\Users\\hp\\eclipse-workspace\\lab00_getting_started\\"
+        + "MileStone1\\model\\src\\run\\PalMansion.txt";
+    int maxTurns = 14;
 
-    System.out.println("Enter file path and max number of turns");
-    if (args.length < 2) {
-      System.out.println("Enter file path and max number of turns");
-    }
+    MansionInterface world = WorldBuilder.build(filePath, maxTurns);
 
-    String filePath = args[0];
-    int maxTurns = Integer.parseInt(args[1]);
-
-    MansionImpl world = WorldBuilder.build(filePath, maxTurns);
-  
+    GameView view = new GameView(world);
+    GuiGameController controller = new GuiGameController(world, view, maxTurns);
     GameController game = new GameController(maxTurns, filePath);
-
-    game.startGame(world);
     
-    ComputerControlledGame cGame = new ComputerControlledGame();
-    cGame.startGame();
+    System.out.println("What type of game do you wanna play?");
+    System.out.println("1. Gui Based Game");
+    System.out.println("2. Text Based Game");
+    int choice = 0;
+    Scanner scanner = new Scanner(System.in);
+    choice = scanner.nextInt();
+    boolean check = false;
+    
+    if (choice == 1 || choice == 2) {
+      check = true;
+    }
+    
+    while (check) {
+      switch (choice) {
+        case 1:
+          controller.initController();
+          controller.showMainFrame();
+          check = false;
+          break;
+        case 2:
+          game.startGame(world);
+          check = false;
+          break;
+        default:
+          System.out.println("Invalid input.");
+          break;
+      } 
+    }
   }
 }
