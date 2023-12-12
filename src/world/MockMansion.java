@@ -1,8 +1,6 @@
 package world;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.InputMismatchException;
@@ -12,8 +10,9 @@ import java.util.Scanner;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
-/** This class for storing the information of the mansion.
- * It has methods assign character and rooms to the mansion and get neighbours of the room.
+/**
+ * This class for storing the information of the mansion. It has methods assign
+ * character and rooms to the mansion and get neighbours of the room.
  */
 public class MockMansion implements MansionInterface {
 
@@ -32,15 +31,16 @@ public class MockMansion implements MansionInterface {
 
   /**
    * Constructor of the mock mansion.
-   * @param readable readable
+   * 
+   * @param readable   readable
    * @param appendable appendable
-   * @param maxTurns allowed turn in the game
+   * @param maxTurns   allowed turn in the game
    */
   public MockMansion(Readable readable, Appendable appendable, int maxTurns) {
     this.appendable = appendable;
     this.scanner = new Scanner(readable);
     this.players = new ArrayList<PlayerImpl>();
-    this.rooms  = new HashMap<Integer, SpaceImpl>();
+    this.rooms = new HashMap<Integer, SpaceImpl>();
     this.petVisitedRoomIds = new ArrayList<>();
     petVisitedPath = new Stack<>();
     this.maxTurns = maxTurns;
@@ -63,12 +63,13 @@ public class MockMansion implements MansionInterface {
 
   /**
    * This method is for assigning pet to the mansion.
+   * 
    * @param pet the pet
    */
   public void assignPet(CharacterPetImpl pet) {
     this.pet = pet;
   }
-  
+
   /**
    * This method is for getting room name of the room in which the player is.
    */
@@ -93,7 +94,7 @@ public class MockMansion implements MansionInterface {
           if (room1.getY1() < room2.getY2() && room1.getY2() > room2.getY1()) {
             room1.addNeighbour(room2);
           }
-        } 
+        }
 
         if (room1.getY2() == room2.getY1() || room1.getY1() == room2.getY2()) {
           if (room1.getX1() < room2.getX2() && room1.getX2() > room2.getX1()) {
@@ -143,9 +144,10 @@ public class MockMansion implements MansionInterface {
   public Map<Integer, SpaceImpl> getRooms() {
     return rooms;
   }
-  
+
   /**
-   * This method is used to get map of rooms.  
+   * This method is used to get map of rooms.
+   * 
    * @return rooms
    */
   @Override
@@ -155,6 +157,7 @@ public class MockMansion implements MansionInterface {
 
   /**
    * This method is for adding player in the mansion.
+   * 
    * @param player the player to be added
    */
   @Override
@@ -162,36 +165,37 @@ public class MockMansion implements MansionInterface {
     players.add(player);
     log.append("Player " + player.getName() + " added to the mansion");
   }
-  
+
   /**
-   * This method is for getting the current player.
-   * It uses the updated current player from playerTurn method.
+   * This method is for getting the current player. It uses the updated current
+   * player from playerTurn method.
    */
   @Override
   public PlayerImpl getCurrentPlayer() {
     return players.get(currentPlayer);
   }
-  
+
   /**
    * This method ensures that the players get their turn one by one.
    */
-  @Override 
+  @Override
   public PlayerImpl playerTurn() {
     if (currentPlayer + 1 >= players.size()) {
       this.turnNumber = this.turnNumber + 1;
     }
     currentPlayer = (currentPlayer + 1) % players.size();
     return getCurrentPlayer();
-  } 
-  
+  }
+
   /**
    * Return the value of turn number.
+   * 
    * @return turnNumber its value
    */
   public int getTurnNumber() {
     return turnNumber;
   }
-  
+
   @Override
   public void displayPlayers() {
     try {
@@ -202,22 +206,24 @@ public class MockMansion implements MansionInterface {
         appendable.append("\nPlayer items : ");
         player.displayPickedItems();
         appendable.append("\nPlayer visited spaces : ");
-        player.displaySpacePath();     
+        player.displaySpacePath();
       }
     } catch (IOException e) {
       e.printStackTrace();
-    } 
-    
+    }
+
   }
-  
-  @Override 
-  public  String toString() {
-    return String.format("Mansion name: %s, number of rows: %d, number of columns: %d "
-    + "and number of rooms: %d", getName(), getRows(), getColumns(), getRoomCount());  
+
+  @Override
+  public String toString() {
+    return String.format(
+        "Mansion name: %s, number of rows: %d, number of columns: %d " + "and number of rooms: %d",
+        getName(), getRows(), getColumns(), getRoomCount());
   }
-  
+
   /**
    * Get the string representation.
+   * 
    * @return string representation
    */
   public String getLog() {
@@ -229,20 +235,20 @@ public class MockMansion implements MansionInterface {
     PlayerImpl playerTurn = playerTurn();
     SpaceImpl currentPlayerSpace = playerTurn.playerSpace();
     boolean checkOtherPlayers = seenByPlayers(currentPlayerSpace, playerTurn);
-    
+
     if (currentPlayerSpace.getId() == targetCharacter.getRoomId()) {
       if (checkOtherPlayers) {
         try {
-          appendable.append("You are watched by another player. " +  "You cannot attack "
+          appendable.append("You are watched by another player. " + "You cannot attack "
               + "the target character");
           String name = seenByPlayers2(currentPlayerSpace, playerTurn);
           appendable.append("Player watching you : " + name);
         } catch (IOException e) {
           e.printStackTrace();
-        }     
+        }
       } else {
         List<ItemImpl> currentPlayerItems = playerTurn.getItems();
-        
+
         if (currentPlayerItems.isEmpty()) {
           try {
             appendable.append("Player " + playerTurn.getName() + " , you have no items.");
@@ -252,39 +258,38 @@ public class MockMansion implements MansionInterface {
           } catch (IOException e) {
             e.printStackTrace();
           }
-      
+
         } else {
           try {
             appendable.append("List of items : ");
             int i = 1;
             for (ItemImpl item : currentPlayerItems) {
-              appendable.append(i + " Item : " + item.getName() + ", damage : " + item.getDamage());
+              appendable
+                  .append(i + " Item : " + item.getName() + ", damage : " + item.getDamage());
               i++;
             }
           } catch (IOException e) {
             e.printStackTrace();
           }
-          
-        
+
           Scanner scanner = new Scanner(System.in);
-          
+
           if (playerTurn.getName().equals("Computer player")) {
             ItemImpl item = getHighestDamageItem(currentPlayerItems);
             int damage = item.getDamage();
             targetCharacter.takenDamage(damage);
             playerTurn.addPoints(damage);
             playerTurn.removePlayerItem(item);
-            
+
             try {
-              appendable.append(playerTurn.getName() + ", you have attacked the target character " 
-                  + targetCharacter.getName() + " with the item " 
-                  + item.getName());
-              appendable.append("Current health of target character is " 
-                  + targetCharacter.getHealth());
+              appendable.append(playerTurn.getName() + ", you have attacked the target character "
+                  + targetCharacter.getName() + " with the item " + item.getName());
+              appendable
+                  .append("Current health of target character is " + targetCharacter.getHealth());
             } catch (IOException e) {
               e.printStackTrace();
             }
-           
+
           } else {
             try {
               int choice = scanner.nextInt();
@@ -294,18 +299,17 @@ public class MockMansion implements MansionInterface {
                 targetCharacter.takenDamage(damage);
                 playerTurn.addPoints(damage);
                 playerTurn.removePlayerItem(item);
-                
+
                 try {
-                  appendable.append(playerTurn.getName() + ", you have attacked "
-                      + "the target character " 
-                      + targetCharacter.getName() + " with the item " 
-                      + item.getName());
-                  appendable.append("Current health of target character is " 
-                      + targetCharacter.getHealth());
+                  appendable.append(
+                      playerTurn.getName() + ", you have attacked " + "the target character "
+                          + targetCharacter.getName() + " with the item " + item.getName());
+                  appendable.append(
+                      "Current health of target character is " + targetCharacter.getHealth());
                 } catch (IOException e) {
                   e.printStackTrace();
                 }
-                
+
               } else {
                 try {
                   appendable.append("Please select valid item number next time");
@@ -354,8 +358,7 @@ public class MockMansion implements MansionInterface {
       if (neighbour.getId() == room.getId()) {
         continue;
       }
-      boolean overlap = room.getX1() < neighbour.getX2() 
-          && neighbour.getX1() < room.getX2();
+      boolean overlap = room.getX1() < neighbour.getX2() && neighbour.getX1() < room.getX2();
       if (overlap && neighbour.getY2() == room.getY1()) {
         leftNeighbour = neighbour;
       }
@@ -409,8 +412,8 @@ public class MockMansion implements MansionInterface {
       for (SpaceInterface neighbour : room.getNeighbours()) {
         if (neighbour.getId() != getPetRoomId()) {
           try {
-            appendable.append("Room : " + neighbour.getName() + " with room id: " 
-                + neighbour.getId() + "\n");
+            appendable.append(
+                "Room : " + neighbour.getName() + " with room id: " + neighbour.getId() + "\n");
           } catch (IOException e) {
             e.printStackTrace();
           }
@@ -434,9 +437,9 @@ public class MockMansion implements MansionInterface {
       gameEnd.append("\nGame over and the player ").append(winner.getName()).append(" wins");
     } else if (this.turnNumber > maxTurns && !(targetCharacter.tcDead())) {
       gameEnd.append("\nGame over and the target has escaped");
-    } 
+    }
     return gameEnd.toString();
-  }  
+  }
 
   @Override
   public String playerDescription(PlayerImpl player1) {
@@ -482,8 +485,7 @@ public class MockMansion implements MansionInterface {
     SpaceImpl currentRoom = getRoomWithId(pet.getPetRoomId());
     List<SpaceInterface> neighbours = currentRoom.getNeighbours();
     List<SpaceInterface> unvisitedNeighbours = neighbours.stream()
-        .filter(n -> !petVisitedRoomIds.contains(n.getId()))
-        .collect(Collectors.toList());
+        .filter(n -> !petVisitedRoomIds.contains(n.getId())).collect(Collectors.toList());
 
     if (!unvisitedNeighbours.isEmpty()) {
       SpaceInterface nextRoom = unvisitedNeighbours.get(0);
@@ -493,8 +495,8 @@ public class MockMansion implements MansionInterface {
     } else if (!petVisitedPath.isEmpty()) {
       petVisitedPath.pop();
       if (!petVisitedPath.isEmpty()) {
-        int previousRoomId = petVisitedPath.peek(); 
-        pet.playerMovesPet(previousRoomId); 
+        int previousRoomId = petVisitedPath.peek();
+        pet.playerMovesPet(previousRoomId);
       }
     }
   }
@@ -515,7 +517,7 @@ public class MockMansion implements MansionInterface {
       } catch (IOException e) {
         e.printStackTrace();
       }
-    
+
       Scanner scanner = new Scanner(System.in);
       String choice = scanner.next();
       if ("y".equals(choice)) {
@@ -555,7 +557,7 @@ public class MockMansion implements MansionInterface {
     }
     return maxDamageItem;
   }
-  
+
   @Override
   public PlayerImpl playerPoints() {
     PlayerImpl winningPlayer = null;
@@ -567,32 +569,34 @@ public class MockMansion implements MansionInterface {
         winningPlayer = player;
       }
     }
-    return winningPlayer; 
+    return winningPlayer;
   }
 
   @Override
   public boolean seenByPlayers(SpaceImpl currentPlayerSpace, PlayerImpl playerTurn) {
     if (players.size() == 1) {
       return false;
-    } 
+    }
     for (PlayerImpl player : players) {
       SpaceImpl playerSpace = player.playerSpace();
       if (player != playerTurn && (playerSpace.getId() == currentPlayerSpace.getId())) {
         return true;
-      } else if (player != playerTurn && currentPlayerSpace.getNeighbours().contains(playerSpace)) {
+      } else if (player != playerTurn
+          && currentPlayerSpace.getNeighbours().contains(playerSpace)) {
         return true;
       }
     }
     return false;
-  } 
-  
+  }
+
   @Override
   public String seenByPlayers2(SpaceImpl currentPlayerSpace, PlayerImpl playerTurn) {
     for (PlayerImpl player : players) {
       SpaceImpl playerSpace = player.playerSpace();
       if (player != playerTurn && (playerSpace.getId() == currentPlayerSpace.getId())) {
         return player.getName();
-      } else if (player != playerTurn && currentPlayerSpace.getNeighbours().contains(playerSpace)) {
+      } else if (player != playerTurn
+          && currentPlayerSpace.getNeighbours().contains(playerSpace)) {
         return player.getName();
       }
     }
@@ -609,5 +613,46 @@ public class MockMansion implements MansionInterface {
     return pet.getName();
   }
 
-  
+  @Override
+  public CharacterInterface getTarget() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String attackTargetGuiPart1(PlayerImpl playerTurn) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void clearPlayers() {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public CharacterPetInterface getPet() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String gameEndGui() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Boolean getCondition() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void attackTargetGuiPart2(PlayerImpl currentPlayer, ItemImpl item) {
+    // TODO Auto-generated method stub
+    
+  }
+
 }

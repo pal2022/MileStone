@@ -12,7 +12,7 @@ public interface ItemInterface {
    * in the text file.
    * @param room the object of the Space class
    */
-  void assignRoom(Space room);
+  void assignRoom(SpaceImpl room);
   
   /**
    * This method is used to get the id of the room in which the item is.

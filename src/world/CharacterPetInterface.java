@@ -6,12 +6,6 @@ package world;
 public interface CharacterPetInterface {
 
   /**
-   * This method moves the pet with every turn following a depth-first 
-   * traversal of the spaces in the world.
-   */
-  void movePet();//depth first traversal
-  
-  /**
    * This method is used for getting the pet's name.
    * @return pet name
    */
@@ -19,8 +13,13 @@ public interface CharacterPetInterface {
   
   /**
    * This method is for moving the pet as per the players choice.
+   * @param givenRoomId the id of the room where player wants to send pet
    */
   void playerMovesPet(int givenRoomId);
   
+  /**
+   * This method is used to get the id of the room the pet is in.
+   * @return room id
+   */
   int getPetRoomId();
 }

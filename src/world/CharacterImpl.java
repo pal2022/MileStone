@@ -79,12 +79,26 @@ public class CharacterImpl implements CharacterInterface {
   }
   
   /**
+   * This method is for knowing if target is dead or not.
+   * @return true if target is dead else false
+   */
+  @Override
+  public boolean tcDead() {
+    return tcDead;
+  }
+  
+  /**
    * A string representation of the character containing character's  name and health.
    * @return String
    */
   @Override
   public String toString() {
     return String.format("Character name: %s, health: %d", getName(), getHealth());
+  }
+
+  @Override
+  public void setRoomId(int roomId) {
+    this.roomId = roomId;
   }
 
 }

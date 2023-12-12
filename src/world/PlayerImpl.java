@@ -21,6 +21,10 @@ public class PlayerImpl implements PlayerInterface {
   private List<String> visitedSpaces;
   private List<Integer> points;
   private int playerFirstSpace;
+  private int x1;
+  private int x2;
+  private int y1;
+  private int y2;
   
 
   /**
@@ -217,6 +221,7 @@ public class PlayerImpl implements PlayerInterface {
   
   /**
    * This methods gives the list of items.
+   * @return items list of items
    */
   public List<ItemImpl> getItems() {
     return items; 
@@ -257,5 +262,75 @@ public class PlayerImpl implements PlayerInterface {
     return totalPoints;
   }
  
+  /**
+   * Sets roomId.
+   * @param roomId to be set
+   */
+  public void setRoomId(int roomId) {
+    this.roomId = roomId;
+  }
+  
+  /**
+   * Get x2.
+   * @return x2 value
+   */
+  public int getX2() {
+    return x2;
+  }
+
+  /**
+   * Set x2.
+   */
+  public void setX2(int x2) {
+    this.x2 = x2;
+  }
+  
+  /**
+   * Get x1.
+   * @return x1 value
+   */
+  public int getX1() {
+    return x1;
+  }
+
+  /**
+   * Set x1.
+   * @param x1 value to be set
+   */
+  public void setX1(int x1) {
+    this.x1 = x1;
+  }
+
+  /**
+   * Get y2.
+   * @return y2 value
+   */
+  public int getY2() {
+    return y2;
+  }
+
+  /**
+   * Set y2.
+   * @param y2 value to be set
+   */
+  public void setY2(int y2) {
+    this.y2 = y2;
+  }
+  
+  /**
+   * Get y1.
+   * @return y1 value
+   */
+  public int getY1() {
+    return y1;
+  }
+
+  /**
+   * Set y1.
+   * @param y1 value to be set
+   */
+  public void setY1(int y1) {
+    this.y1 = y1;
+  }
   
 }

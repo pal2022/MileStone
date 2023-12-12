@@ -2,6 +2,7 @@ package world;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComponent;
 
 /**
  * This is class for the rooms of the mansion.
@@ -18,6 +19,7 @@ public class SpaceImpl implements SpaceInterface {
   private int y2;
   private List<SpaceImpl> neighbours;
   private List<ItemImpl> items;
+  private JComponent graphicalComponent;
   
   /**
    * This constructor takes the required information obtained by reading the text file.
@@ -102,6 +104,15 @@ public class SpaceImpl implements SpaceInterface {
   public int getX1() {
     return this.x1;
   }
+  
+  /**
+   * Get X1.
+   * @param s multiplication factor
+   * @return value multiplied value
+   */
+  public int getX1(int s) {
+    return s * this.x1;
+  }
 
   /**
    * This method is for getting the x2 coordinate of space.
@@ -109,6 +120,16 @@ public class SpaceImpl implements SpaceInterface {
   @Override
   public int getX2() {
     return this.x2;
+  }
+  
+  
+  /**
+   * Get x2 * s.
+   * @param s multiplication factor
+   * @return value multiplied value
+   */
+  public int getX2(int s) {
+    return s * this.x2;
   }
 
   /**
@@ -118,6 +139,15 @@ public class SpaceImpl implements SpaceInterface {
   public int getY1() {
     return this.y1;
   }
+  
+  /**
+   * Get y1 * s.
+   * @param s multiplication factor
+   * @return value multiplied value
+   */
+  public int getY1(int s) {
+    return s * this.y1;
+  }
 
   /**
    * This method is for getting the y2 coordinate of space.
@@ -126,6 +156,16 @@ public class SpaceImpl implements SpaceInterface {
   public int getY2() {
     return this.y2;
   }
+  
+  /**
+   * Get y2 * s.
+   * @param s multiplication factor
+   * @return value multiplied value
+   */
+  public int getY2(int s) {
+    return s * this.y2;
+  }
+  
 
   /**
    * This method is for getting the id of space.
@@ -163,7 +203,6 @@ public class SpaceImpl implements SpaceInterface {
     List<ItemImpl> items = new ArrayList<>();
     for (ItemImpl item : this.items) {
       items.add(item);
-      System.out.println("\n");
     }
     return items;
   }
@@ -172,4 +211,5 @@ public class SpaceImpl implements SpaceInterface {
   public String toString() {
     return getName();
   }
+  
 }

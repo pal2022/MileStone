@@ -41,5 +41,11 @@ public interface CharacterInterface {
    * @return true if target is dead else false
    */
   boolean tcDead();
+
+  /**
+   * To set room id.
+   * @param roomId to be set
+   */
+  void setRoomId(int roomId);
     
 }
